@@ -45,7 +45,7 @@ export class Player {
      // Update ObjectVY
     if(this.y <= this.game.height/2){
       const testV = this.y-this.game.height/2 // Amount we should bring objects down
-      this.game.objectsVY = Math.abs(testV/100)
+      this.game.objectsVY += 0.5;//Math.abs(testV/100)
     }else{
       this.game.objectsVY = 0
     }
@@ -64,7 +64,7 @@ export class Player {
     // Base check
     if(this.y >= this.game.height - this.height ){ // Check if player if lower then canvas height
       if(this.game.VY >= this.game.base.height){ // Check if the base is still visible
-        this.y += this.fallingSpeed // Makes the player fall
+        //this.y += this.fallingSpeed // Makes the player fall
       }else{
         this.y = this.game.height - this.height  // Places the player back to the base
       }
