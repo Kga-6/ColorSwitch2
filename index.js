@@ -34,7 +34,7 @@ window.addEventListener("load",function(){
       this.VY = 0 // How far vertical a player got
 
       this.player = new Player(this); // creates a new player
-      this.input = new InputHandler(); // creates the players input
+      this.input = new InputHandler(this); // creates the players input
       this.base = new Base(this)
 
       this.objects = []; 
@@ -109,8 +109,8 @@ window.addEventListener("load",function(){
     if(game.gameOver == false){
       mainMenu.style.display = "none"
       gameMenu.style.display = "block"
-      ctx.clearRect(0,0,canvas.width,canvas.height)
       game.update()
+      ctx.clearRect(0,0,canvas.width,canvas.height)
       game.draw(ctx)
       requestAnimationFrame(animate)
     }else{

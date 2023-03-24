@@ -7,6 +7,12 @@ export class Player {
     this.y = this.game.height - this.height; // place player at the bottom 
     this.image
     this.color = "red"
+
+    // new system
+    this.velocity = 0
+    this.gravity = 0.175
+    this.lift = -10;
+
     this.fallingSpeed = 0.15
     this.fallingMax = 2
 
@@ -33,31 +39,49 @@ export class Player {
     }
 
   }
+  jump(){
+    this.velocity += this.lift;
+    
+     // Update ObjectVY
+    if(this.y <= this.game.height/2){
+      const testV = this.y-this.game.height/2 // Amount we should bring objects down
+      this.game.objectsVY = Math.abs(testV/100)
+    }else{
+      this.game.objectsVY = 0
+    }
+  }
   update(input){
     this.checkCollisions()
 
+    this.velocity += this.gravity;
+    this.velocity *= 0.9; // Air resistance
+    this.y += this.velocity;
+
+    if(this.y >= this.game.height/2){
+      this.game.objectsVY = 0
+    }
+
+    // Base check
+    if(this.y >= this.game.height - this.height ){ // Check if player if lower then canvas height
+      if(this.game.VY >= this.game.base.height){ // Check if the base is still visible
+        this.y += this.fallingSpeed // Makes the player fall
+      }else{
+        this.y = this.game.height - this.height  // Places the player back to the base
+      }
+    }
+
     // New Vertical Movement
-    if(input.jumpEvent == true){
+    /*if(input.jumpEvent == true){
       this.fallingSpeed = 0.1 // reset player falling speed
       
       // Update ObjectVY
       if(this.y <= this.game.height/2){
         const testV = this.y-this.game.height/2 // Amount we should bring objects down
         this.game.objectsVY = Math.abs(testV/50)
-        this.game.objectsVY = 0.9
       }else{
         this.game.objectsVY = 0
       }
 
-      // Player Jump
-      /*if(this.y <= this.game.height/2 - 20){
-        this.jumpHeight += 0.01
-        this.y -= this.jumpHeight // Makes the player fly
-        console.log("Player entered half mark")
-      }else{
-        this.jumpHeight += 0.075
-        this.y -= this.jumpHeight // Makes the player fly
-      }*/
       this.jumpHeight += 0.075
       this.y -= this.jumpHeight // Makes the player fly
 
@@ -67,12 +91,6 @@ export class Player {
         this.jumpHeight = 0
         console.log("Jump conplated")
       }
-      /*if(this.jumpHeight > this.jumpGoal){
-        input.jumpEvent = false
-        this.jumpHeight = 0
-        console.log("Jump conplated")
-        this.oldY = this.y
-      }*/
 
     }else if(input.jumpEvent == false){
       this.oldY = this.y
@@ -94,7 +112,7 @@ export class Player {
       }else{
         this.y += this.fallingSpeed // Makes the player fall
       }
-    }
+    }*/
 
     // Old Vertical Movement
     /*if(input.keys.includes(" ") || input.keys.includes("ArrowUp")){

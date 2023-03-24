@@ -1,5 +1,6 @@
 export class InputHandler{
-  constructor(){
+  constructor(game){
+    this.game = game
     this.keys = [];
     this.jumpEvent = false;
     window.addEventListener("keydown", e => {
@@ -18,13 +19,18 @@ export class InputHandler{
       }
     })
 
-    window.addEventListener("click",()=>{
+    window.addEventListener("keydown",(e)=>{
       //console.log("Player wants to JUMP")
-      this.jumpEvent = true
+      //this.jumpEvent = true
+      if(e.key == "ArrowUp"){
+        this.game.player.jump()
+      }
     })
+    
 
     window.addEventListener("touchend",(e)=>{
-      this.jumpEvent = true
+      //this.jumpEvent = true
+      this.game.player.jump()
     })
 
   }
