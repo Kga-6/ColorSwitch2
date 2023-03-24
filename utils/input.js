@@ -19,7 +19,11 @@ export class InputHandler{
     })
 
     window.addEventListener("click",()=>{
-      console.log("Player wants to JUMP")
+      //console.log("Player wants to JUMP")
+      this.jumpEvent = true
+    })
+
+    window.addEventListener("touchend",(e)=>{
       this.jumpEvent = true
     })
 
