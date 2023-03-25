@@ -51,7 +51,6 @@ export class Player {
     }
   }
   update(input){
-    this.checkCollisions()
 
     this.velocity += this.gravity;
     this.velocity *= 0.9; // Air resistance
@@ -69,6 +68,8 @@ export class Player {
         this.y = this.game.height - this.height  // Places the player back to the base
       }
     }
+
+    this.checkCollisions()
 
     // New Vertical Movement
     /*if(input.jumpEvent == true){

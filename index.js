@@ -19,10 +19,8 @@ window.addEventListener("load",function(){
 
   canvas.width = gameWidth
   canvas.height = window.innerHeight
-
   mainMenu.style.width = `${gameWidth}px`
   mainMenu.style.height = `${window.innerHeight}px`
-
   gameMenu.style.width = `${gameWidth}px`
   gameMenu.style.height = `${window.innerHeight}px`
 
@@ -130,6 +128,14 @@ window.addEventListener("load",function(){
   }
   function start(){
     if(game == null){
+
+      canvas.width = gameWidth
+      canvas.height = window.innerHeight
+      mainMenu.style.width = `${gameWidth}px`
+      mainMenu.style.height = `${window.innerHeight}px`
+      gameMenu.style.width = `${gameWidth}px`
+      gameMenu.style.height = `${window.innerHeight}px`
+
       game = new Game(canvas.width,canvas.height)
       animate()
     }
